@@ -3,6 +3,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import http from "http";
+import  mongoose  from "mongoose";
+
 
 dotenv.config();
 
@@ -22,11 +24,27 @@ app.use(cors());
 
 //#region import router
 import weatherRouter from "./routers/weather_router.js";
+import subscriptionRouter from "./routers/subscription_router.js";
 //#end region
 
 //#region setup router
 app.use("/api/v1/weather", weatherRouter);
+app.use("/api/v1/subscription", subscriptionRouter);
+
 //#end region
+
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(async () => {
+    console.log("Connected to MongoDB!!!");
+  })
+  .catch((e) => {
+    console.log("Error connecting to MongoDB");
+    console.log(e.message);
+  });
 
 //#region start server
 server.listen(PORT, "0.0.0.0", () => {

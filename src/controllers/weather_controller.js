@@ -22,7 +22,6 @@ export const WeatherController = {
           .json(errorResponse(response.status, response.statusText));
       }
     } catch (error) {
-      // Handle the error here and send an appropriate response
       console.error("Error fetching weather data:", error);
       res.status(500).json(errorResponse(500, "Internal Server Error"));
     }
