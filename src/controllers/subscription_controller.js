@@ -3,7 +3,9 @@ import User from "../models/user.js";
 import Subscription from "../models/subscription.js";
 import { errorResponse, successReponse } from "../../utils/response_format.js";
 import { TransporterService } from "../services/transporter.js";
+import dotenv from "dotenv";
 
+dotenv.config();
 const generateToken = () => {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -211,7 +213,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                             <table border="0" cellpadding="0" cellspacing="0">
                               <td style="font-size: 15px; padding: 14px 32px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;text-align: center; border-radius: 19px; display: block; border: 3px solid #e9ecef; background: 0% repeat #e367a6;">
                                 <span style="font-size: 26px; line-height: 21px; color: #ffffff;">
-                                  <span style="font-weight: 700; margin-left: 0px; margin-right: 0px;">http://localhost:3000/api/v1/subscription/confirm-email/${verificationToken}</span>
+                                  <span style="font-weight: 700; margin-left: 0px; margin-right: 0px;">${process.env.BASE_URL}subscription/confirm-email/${verificationToken}</span>
                                 </span>
                               </td>
                             </table>
@@ -225,7 +227,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                   <!-- start copy -->
                   <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                      <p style="margin: 0;">Để đảm bảo an toàn cho tài khoản của bạn, xin vui lòng không chia sẻ mã này với bất kỳ ai để tránh mất thông tin cá nhân và tài khoản.</p>
+                      <p style="margin: 0;">...</p>
                     </td>
                   </tr>
                   <!-- end copy -->
@@ -233,7 +235,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                   <!-- start copy -->
                   <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                      <p style="margin: 0;">Thân ái./.<br> Đội ngũ NOVA Universe</p>
+                      <p style="margin: 0;">Thân ái./.<br> Huy Weather</p>
                     </td>
                   </tr>
                   <!-- end copy -->
@@ -270,7 +272,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                   <tr>
                     <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 11px; line-height: 20px; color: #666;">
                       <p style="margin: 0;">Linh Trung Ward, Thu Duc City, Ho Chi Minh City</p>
-                      <p style="margin: 0;">© 2024 Huy Universe</p>
+                      <p style="margin: 0;">© 2024 Huy Weather</p>
                     </td>
                   </tr>
                   <!-- end unsubscribe -->
