@@ -3,8 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import http from "http";
-import  mongoose  from "mongoose";
-
+import mongoose from "mongoose";
 
 dotenv.config();
 
@@ -45,6 +44,7 @@ mongoose
     console.log("Error connecting to MongoDB");
     console.log(e.message);
   });
+import "./services/scheduler.js";
 
 //#region start server
 server.listen(PORT, "0.0.0.0", () => {
