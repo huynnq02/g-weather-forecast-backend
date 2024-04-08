@@ -22,7 +22,7 @@ const generateToken = () => {
 
 const sendVerificationEmail = async (email, verificationToken) => {
   const mailOptions = {
-    from: "Huy Weather <huyy.802@gmail.com>",
+    from: "Weather <huyy.802@gmail.com>",
     to: email,
     subject: "Weather - Xác minh địa chỉ email",
     html: `<!DOCTYPE html>
@@ -138,15 +138,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                 <tr>
                 <td align="center" valign="top" width="600">
                 <![endif]-->
-                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-                  <tr>
-                    <td align="center" valign="top" style="padding: 36px 24px;">
-                      <a href="https://www.facebook.com/NOVAUniverseVietnam" target="_blank" style="display: inline-block;">
-                        <img src="https://res.cloudinary.com/dc8kxjddi/image/upload/v1685730974/IMAGE/logonova_gqhm3y.png" alt="Logo" border="0" width="48" style="display: block; width: 68px; max-width: 78px; min-width: 78px;">
-                      </a>
-                    </td>
-                  </tr>
-                </table>
+                
                 <!--[if (gte mso 9)|(IE)]>
                 </td>
                 </tr>
@@ -199,7 +191,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                         <img src="https://raw.githubusercontent.com/ABSphreak/ABSphreak/master/gifs/Hi.gif" alt="Hi" style="width: 30px; height: 30px; margin-right: 0px;">
                         <p style="margin: 0;">,</p>
                       </div>
-                      <p style="margin: 0;">Click vào link dưới:</p>
+                      <p style="margin: 0;">Click vào link dưới để xác nhận subscription.</p>
                     </td>
                   </tr>
                   
@@ -211,7 +203,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                         <tr>
                           <td align="center" bgcolor="#ffffff" style="padding: 12px;">
                             <table border="0" cellpadding="0" cellspacing="0">
-                              <td style="font-size: 15px; padding: 14px 32px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;text-align: center; border-radius: 19px; display: block; border: 3px solid #e9ecef; background: 0% repeat #e367a6;">
+                              <td style="font-size: 15px; padding: 14px 32px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;text-align: center; border-radius: 19px; display: block; border: 3px solid #e9ecef; background: 0% repeat #ffffff;">
                                 <span style="font-size: 26px; line-height: 21px; color: #ffffff;">
                                   <span style="font-weight: 700; margin-left: 0px; margin-right: 0px;">${process.env.BASE_URL}subscription/confirm-email/${verificationToken}</span>
                                 </span>
@@ -227,7 +219,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                   <!-- start copy -->
                   <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                      <p style="margin: 0;">...</p>
+                      <p style="margin: 0;">Nếu hành động này không phải của bạn, vui lòng xóa email này hoặc liên hệ với chúng tôi.</p>
                     </td>
                   </tr>
                   <!-- end copy -->
@@ -235,7 +227,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
                   <!-- start copy -->
                   <tr>
                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-                      <p style="margin: 0;">Thân ái./.<br> Huy Weather</p>
+                      <p style="margin: 0;">Thân ái./.<br>Weather</p>
                     </td>
                   </tr>
                   <!-- end copy -->
