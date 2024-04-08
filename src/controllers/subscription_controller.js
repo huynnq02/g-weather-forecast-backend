@@ -345,7 +345,20 @@ export const SubscriptionController = {
       user.verificationToken = null;
       await user.save();
       await Subscription.create({ email: user.email, location: user.location });
-      res.status(200).json(successReponse("Email confirmed successfully"));
+      // res.status(200).json(successReponse("Email confirmed successfully"));
+      const successMessage = `
+            <html>
+            <head>
+                <title>Email Confirmation</title>
+            </head>
+            <body>
+                <h1>Confirmation Successful</h1>
+                <p>You will now receive weather updates via email every day.</p>
+            </body>
+            </html>
+        `;
+
+      res.status(200).send(successMessage);
     } catch (error) {
       console.error("Error confirming email:", error);
       res.status(500).json(errorResponse(500, "Internal Server Error"));
