@@ -71,7 +71,6 @@ Don't want to receive these emails anymore? You can unsubscribe at any time by c
     console.error("Error sending new information:", error);
   }
 };
-sendNewInfo();
 
 cron.schedule(
   "0 0 * * *",
