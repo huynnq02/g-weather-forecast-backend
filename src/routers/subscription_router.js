@@ -8,5 +8,8 @@ router.get(
   "/confirm-email/:verificationToken",
   SubscriptionController.confirmEmail
 );
-
+router.get(
+  "/unsubscribe/:verificationToken",
+  SubscriptionController.unsubscribe
+);
 export default router;

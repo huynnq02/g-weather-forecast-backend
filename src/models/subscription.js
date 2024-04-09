@@ -10,6 +10,10 @@ const subscriptionSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  verificationToken: {
+    type: String,
+    default: null,
+  },
 });
 
 const Subscription = mongoose.model(

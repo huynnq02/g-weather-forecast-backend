@@ -364,4 +364,31 @@ export const SubscriptionController = {
       res.status(500).json(errorResponse(500, "Internal Server Error"));
     }
   },
+  unsubscribe: async (req, res) => {
+    try {
+      const { verificationToken } = req.params;
+      const subscription = await Subscription.findOne({ verificationToken });
+
+      if (subscription) {
+        await Subscription.findOneAndDelete({ verificationToken });
+        const successMessage = `
+                <html>
+                <head>
+                    <title>Unsubscription Successful</title>
+                </head>
+                <body>
+                    <h1>Unsubscription Successful</h1>
+                    <p>You have successfully unsubscribed from weather updates.</p>
+                </body>
+                </html>
+            `;
+        res.status(200).send(successMessage);
+      } else {
+        res.status(404).json({ error: "Subscription not found" });
+      }
+    } catch (error) {
+      console.error("Error unsubscribing:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };
