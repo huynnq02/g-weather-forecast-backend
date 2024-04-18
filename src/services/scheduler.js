@@ -5,6 +5,7 @@ console.log("Schedule is working");
 import dotenv from "dotenv";
 import { TransporterService } from "./transporter.js";
 import crypto from "crypto";
+import { WEATHER_UPDATE_FORM } from "../../utils/email_form_html.js";
 dotenv.config();
 const API_KEY = process.env.WEATHER_API_KEY;
 const WEATHER_API_BASE_URL = process.env.WEATHER_API_BASE_URL;
@@ -25,19 +26,7 @@ const sendNewInfo = async () => {
       if (response.status === 200) {
         const weatherData = response.data;
 
-        const weatherUpdate = `
-Weather update for ${weatherData.location.name}:
-- Temperature: ${weatherData.current.temp_c}°C (${weatherData.current.temp_f}°F)
-- Condition: ${weatherData.current.condition.text}
-- Wind: ${weatherData.current.wind_kph} km/h from ${weatherData.current.wind_dir}
-- Pressure: ${weatherData.current.pressure_mb} mb
-- Humidity: ${weatherData.current.humidity}%
-- UV Index: ${weatherData.current.uv}
-- Visibility: ${weatherData.current.vis_km} km (${weatherData.current.vis_miles} miles)
-
-Don't want to receive these emails anymore? You can unsubscribe at any time by clicking the following link: ${BASE_URL}subscription/unsubscribe/${verificationToken}
-
-        `;
+        const weatherUpdate = WEATHER_UPDATE_FORM(weatherData, BASE_URL, verificationToken);
         const mailOptions = {
           from: "Weather <huyy.802@gmail.com>",
           to: email,
