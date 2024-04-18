@@ -51,10 +51,14 @@ Don't want to receive these emails anymore? You can unsubscribe at any time by c
         TransporterService.transporter.sendMail(
           mailOptions,
           async (error, info) => {
-            if (error) {
-              console.error(`Error sending email to ${email}:`, error);
-            } else {
-              console.log(`Weather forecast sent to ${email}`);
+            try {
+              if (error) {
+                console.error(`Error sending email to ${email}:`, error);
+              } else {
+                console.log(`Weather forecast sent to ${email}`);
+              }
+            } catch (err) {
+              console.error("Error in sending mail callback:", err);
             }
           }
         );

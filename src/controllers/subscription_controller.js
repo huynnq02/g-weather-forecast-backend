@@ -4,6 +4,7 @@ import Subscription from "../models/subscription.js";
 import { errorResponse, successReponse } from "../../utils/response_format.js";
 import { TransporterService } from "../services/transporter.js";
 import dotenv from "dotenv";
+import res from "express/lib/response.js";
 
 dotenv.config();
 const generateToken = () => {
@@ -21,11 +22,12 @@ const generateToken = () => {
 };
 
 const sendVerificationEmail = async (email, verificationToken) => {
-  const mailOptions = {
-    from: "Weather <huyy.802@gmail.com>",
-    to: email,
-    subject: "Weather - Xác minh địa chỉ email",
-    html: `<!DOCTYPE html>
+  try {
+    const mailOptions = {
+      from: "Weather <huyy.802@gmail.com>",
+      to: email,
+      subject: "Weather - Xác minh địa chỉ email",
+      html: `<!DOCTYPE html>
         <html>
         <head>
         
@@ -284,17 +286,24 @@ const sendVerificationEmail = async (email, verificationToken) => {
         
         </body>
         </html>`,
-  };
-  TransporterService.transporter.sendMail(mailOptions, async (error, info) => {
-    if (error) {
-      return false;
-    } else {
-      console.log(
-        `Verification email sent to ${email} with token: ${verificationToken}`
-      );
-      return true;
-    }
-  });
+    };
+    TransporterService.transporter.sendMail(
+      mailOptions,
+      async (error, info) => {
+        if (error) {
+          return false;
+        } else {
+          console.log(
+            `Verification email sent to ${email} with token: ${verificationToken}`
+          );
+          return true;
+        }
+      }
+    );
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+    console.log(error.message);
+  }
 };
 
 export const SubscriptionController = {
