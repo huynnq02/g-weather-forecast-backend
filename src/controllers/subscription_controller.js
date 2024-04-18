@@ -5,21 +5,16 @@ import { errorResponse, successReponse } from "../../utils/response_format.js";
 import { TransporterService } from "../services/transporter.js";
 import dotenv from "dotenv";
 import res from "express/lib/response.js";
-import { EMAIL_CONFIRMATION_SUCCEED_FORM, EMAIL_SUBSCRIPTION_FORM, EMAIL_UNSUBCRIPTION_SUCCEED_FORM } from "../../utils/email_form_html.js";
+import {
+  EMAIL_CONFIRMATION_SUCCEED_FORM,
+  EMAIL_SUBSCRIPTION_FORM,
+  EMAIL_UNSUBCRIPTION_SUCCEED_FORM,
+} from "../../utils/email_form_html.js";
 dotenv.config();
-const BASE_URL = process.env.BASE_URL
-const generateToken = () => {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let token = "";
-  const length = 50; // Length of the token
-
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    token += characters[randomIndex];
-  }
-
-  return token;
+const BASE_URL = process.env.BASE_URL;
+import crypto from "crypto";
+const generateRandomString = () => {
+  return crypto.randomBytes(20).toString("hex");
 };
 
 const sendVerificationEmail = async (email, verificationToken) => {
@@ -58,7 +53,7 @@ export const SubscriptionController = {
 
       if (!existingSubscription) {
         const existingUser = await User.findOne({ email });
-        const verificationToken = generateToken();
+        const verificationToken = generateRandomString();
         if (!existingUser) {
           const newUser = await User.create({
             email: email,
